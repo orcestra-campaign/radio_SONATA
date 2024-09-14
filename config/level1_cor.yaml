@@ -114,54 +114,30 @@ variables:
             - sounding
             - level
         internal_varname : "humidity"
-    dp:
+    u:
         attrs:
-            standard_name: "dew_point_temperature"
-            long_name: "dew point temperature"
-            units: "K"
+            standard_name: "u"
+            long_name: "meridional wind"
+            units: "m/s"
             coordinates: "launch_time flight_time lon lat p"
         encodings:
             dtype: "float32"
         coordinates:
             - sounding
             - level
-        internal_varname : "dew_point"
-    mr:
+        internal_varname : "u"
+    v:
         attrs:
-            standard_name: "humidity_mixing_ratio"
-            long_name: "water vapor mixing ratio"
-            units: "kg/kg"
+            standard_name: "v"
+            long_name: "zonal wind"
+            units: "m/s"
             coordinates: "launch_time flight_time lon lat p"
         encodings:
             dtype: "float32"
         coordinates:
             - sounding
             - level
-        internal_varname : "mixing_ratio"
-    wspd:
-        attrs:
-            standard_name: "wind_speed"
-            long_name: "wind speed"
-            units: "knots"
-            coordinates: "launch_time flight_time lon lat p"
-        encodings:
-            dtype: "float32"
-        coordinates:
-            - sounding
-            - level
-        internal_varname : "wind_speed"
-    wdir:
-        attrs:
-            standard_name: "wind_from_direction"
-            long_name: "wind direction"
-            units: "degree"
-            coordinates: "launch_time flight_time lon lat p"
-        encodings:
-            dtype: "float32"
-        coordinates:
-            - sounding
-            - level
-        internal_varname : "wind_direction"
+        internal_varname : "v"
     lat:
         attrs:
             standard_name: "latitude"

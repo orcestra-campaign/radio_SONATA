@@ -378,6 +378,16 @@ class Sounding:
             version=cfg.main.get("data_version"),
         )
         output = self.meta_data["launch_time_dt"].strftime(output)
+
+        timestamp = self.meta_data["launch_time_dt"].strftime('%Y%m%d%H%M')
+        if self.meta_data["sounding_direction"] == "ascent":
+            timestamp += 'a'
+        elif self.meta_data["sounding_direction"] == "descent":
+            timestamp += 'd'
+        else:
+            logging.warning("Invalid sounding direction. No suffix added.")
+        self.dataset = self.dataset.assign_coords(sounding=[timestamp])
+
         directory = os.path.dirname(output)
         Path(directory).mkdir(parents=True, exist_ok=True)
         self.dataset.encoding["unlimited_dims"] = ["sounding"]

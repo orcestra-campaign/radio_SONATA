@@ -116,8 +116,8 @@ variables:
         internal_varname : "humidity"
     u:
         attrs:
-            standard_name: "u"
-            long_name: "meridional wind"
+            standard_name: "eastward_wind"
+            long_name: "Zonal wind"
             units: "m/s"
             coordinates: "launch_time flight_time lon lat p"
         encodings:
@@ -128,8 +128,8 @@ variables:
         internal_varname : "u"
     v:
         attrs:
-            standard_name: "v"
-            long_name: "zonal wind"
+            standard_name: "northward_wind"
+            long_name: "Meridional wind"
             units: "m/s"
             coordinates: "launch_time flight_time lon lat p"
         encodings:

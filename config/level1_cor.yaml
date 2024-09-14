@@ -118,6 +118,7 @@ variables:
         attrs:
             standard_name: "eastward_wind"
             long_name: "Zonal wind"
+
             units: "m/s"
             coordinates: "launch_time flight_time lon lat p"
         encodings:

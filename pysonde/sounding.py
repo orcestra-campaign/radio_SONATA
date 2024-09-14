@@ -15,6 +15,7 @@ import thermodynamics as td
 import xarray as xr
 from omegaconf import OmegaConf
 from omegaconf.errors import ConfigAttributeError
+from meteorology_helpers import get_wind_components
 
 logging.debug(f"Pint_xarray version:{pint_xarray.__version__}")
 
@@ -202,6 +203,12 @@ class Sounding:
                 * self.profile.humidity.values
                 / 100.0
             )
+        #dir_rad = np.deg2rad(self.profile.wind_direction.values)
+        #wind_speed = self.profile.wind_speed.values
+        #u = -1 * wind_speed * np.sin(dir_rad)
+        #v = -1 * wind_speed * np.cos(dir_rad)
+        #self.profile.insert(10,"u", u)
+        #self.profile.insert(10,"v", v)
         self.profile.insert(10, "mixing_ratio", mixing_ratio)
         self.meta_data["launch_time_dt"] = self.profile.flight_time.iloc[0]
         # Resolution
@@ -371,6 +378,16 @@ class Sounding:
             version=cfg.main.get("data_version"),
         )
         output = self.meta_data["launch_time_dt"].strftime(output)
+
+        timestamp = self.meta_data["launch_time_dt"].strftime('%Y%m%d%H%M')
+        if self.meta_data["sounding_direction"] == "ascent":
+            timestamp += 'a'
+        elif self.meta_data["sounding_direction"] == "descent":
+            timestamp += 'd'
+        else:
+            logging.warning("Invalid sounding direction. No suffix added.")
+        self.dataset = self.dataset.assign_coords(sounding=[timestamp])
+
         directory = os.path.dirname(output)
         Path(directory).mkdir(parents=True, exist_ok=True)
         self.dataset.encoding["unlimited_dims"] = ["sounding"]

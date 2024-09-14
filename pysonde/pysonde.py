@@ -100,7 +100,6 @@ def load_reader(filename):
         reader = MW41
 
     elif ending == ".cor":
-        print('youhuuuuuuu')
         from .readers.readers import METEOMODEM
 
         reader = METEOMODEM
@@ -157,7 +156,7 @@ def main(args=None):
                         )
                     )
                     continue
-                
+
                 snd.calculate_additional_variables(cfg)
                 snd.convert_sounding_df2ds()
                 snd.create_dataset(cfg)

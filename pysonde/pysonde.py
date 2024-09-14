@@ -157,10 +157,10 @@ def main(args=None):
                         )
                     )
                     continue
-                snd.calculate_additional_variables(cfg)
-                snd.convert_sounding_df2ds()
-                snd.create_dataset(cfg)
-                snd.export(args["output"], cfg)
+                snd.calculate_additional_variables(cfg) #ascent rate, dewpoint, saturation vapour pressure, location
+                snd.convert_sounding_df2ds() #ascent rate, dewpoint, mixing ratio, location
+                snd.create_dataset(cfg) #add metadata from config file (platform, launch time etc.)
+                snd.export(args["output"], cfg) #output
 
         elif isinstance(reader, readers.readers.METEOMODEM):
             sounding_asc, sounding_dsc = sounding.split_by_direction()
@@ -173,10 +173,10 @@ def main(args=None):
                         )
                     )
                     continue
-                snd.calculate_additional_variables(cfg)
-                snd.convert_sounding_df2ds()
-                snd.create_dataset(cfg)
-                snd.export(args["output"], cfg)
+                snd.calculate_additional_variables(cfg) #ascent rate, dewpoint, saturation vapour pressure, location
+                snd.convert_sounding_df2ds() #converts to xarray
+                snd.create_dataset(cfg) #add metadata from config file (platform, launch time etc.)
+                snd.export(args["output"], cfg) #output
 
         elif isinstance(reader, readers.readers.pysondeL1):
             cfg = h.replace_placeholders_cfg_level2(cfg)

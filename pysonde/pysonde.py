@@ -157,6 +157,7 @@ def main(args=None):
                         )
                     )
                     continue
+                
                 snd.calculate_additional_variables(cfg)
                 snd.convert_sounding_df2ds()
                 snd.create_dataset(cfg)
@@ -232,6 +233,7 @@ def main(args=None):
                 cfg.level2.setup.interpolation_grid_max,
                 cfg.level2.setup.interpolation_grid_inc,
             )
+            
             ds_interp = p2.interpolation(
                 ds_new,
                 args["method"],
@@ -259,6 +261,7 @@ def main(args=None):
             )
 
             sounding.profile = ds_interp
+            print(sounding.profile)
             sounding.create_dataset(cfg, level=2)
             sounding.get_direction()
             sounding.set_launchtime()
